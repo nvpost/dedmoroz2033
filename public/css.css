@@ -1,0 +1,30 @@
+#app p{
+    margin: 0px;
+}
+.pribor_panel{
+    display: flex;
+}
+.pribor_item_place{
+    display: flex;
+    width: 600px;
+    border: 1px solid;
+    flex-wrap: wrap;
+}
+
+.pribor_item{
+    border: 1px solid;
+    margin: 5px;
+    padding: 3px;
+}
+
+.right_side{
+    display: flex;
+    align-items: center;
+}
+.answer_blok{
+    width: 100px;
+    height: 100px;
+    border: 1px solid;
+    margin: 5px;
+    padding: 3px;
+}
