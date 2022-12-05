@@ -1,7 +1,8 @@
 <template>
-    
-  <ResultField :status="status" :level="level"/>
-  <CheckList />
+   <div class="game_wrapper">
+    <ResultField :status="status" :level="level"/>
+    <CheckList />
+</div>
   <DedMorozSay :words="words"/>
 <div class="pribor_panel">
     
@@ -24,11 +25,15 @@
             </div>
         </div> 
     </div>
+    <div class="middle_side">
+        &#10140;
+    </div>
     <div class="right_side">
         <div :class="('answer_blok ' + level_class)" data-id="0"
             @drop="drop"
             @dragover="allowDrop"
         ></div>
+        <div :class="('strow ' + level_class)">&#8213;</div>
         <div :class="('answer_blok ' + level_class)" data-id="1"
             @drop="drop"
             @dragover="allowDrop"
@@ -130,9 +135,17 @@ export default{
             return check_flag
         },
         youWin(){
-            this.$store.state.levels[this.level].status = true
+            let i = 0
+            let blink_interval = setInterval(()=>{
+                this.$store.state.levels[this.level].status = !this.$store.state.levels[this.level].status 
 
-            this.status = this.$store.state.levels[this.level].status
+                this.status = this.$store.state.levels[this.level].status
+                i++
+            }, 100)
+            if(i==100){
+                clearInterval(blink_interval)
+            }
+
 
             this.words="Молодец!!!"
         }

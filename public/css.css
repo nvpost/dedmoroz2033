@@ -10,14 +10,35 @@ body{
 }
 #app{
     font-family:'Comic';
-    background-image: url('./imgs/level1.png');
-    background-repeat: no-repeat;
-    /* background-position: center; */
+    /*background-image: url('imgs/dedmoroz.png');
+     background-repeat: no-repeat;
+    background-position: center; */
     height: 100vh;
 }
+
 #app p{
     margin: 0px;
     
+}
+.game_wrapper{
+    display: flex;
+}
+.game_main_field_wrapper,
+.onoff_field{
+    height: 800px;
+    width: 1400px;
+    flex: 1;
+    min-width: 1400px;
+    /* background-size: cover !important;
+    background-repeat: no-repeat !important; */
+}
+.onoff_field{
+    position: absolute;
+    top: 0px;
+    left: 0px;
+}
+.game_main_field_wrapper img{
+    width: 100%;
 }
 .pribor_panel{
     display: flex;
@@ -26,7 +47,7 @@ body{
 }
 .pribor_item_place{
     display: flex;
-    width: 400px;
+    width: 620px;
     /* border: 1px solid; */
     flex-wrap: wrap;
     
@@ -37,15 +58,29 @@ body{
     display: flex;
     align-items: center;
 }
+.middle_side{
+    display: flex;
+    align-content: center;
+    align-items: center;
+
+    font-size: 60px; 
+}
+.strow{
+    font-size: 44px; 
+}
 .answer_blok,
 .pribor_item{
-    width: 7vh;
-    height: 7vh;
+    width: 100px;
+    height: 100px;
     border: 3px solid;
     margin: 5px;
     padding: 3px;
     border-color: gray;
 }
+.answer_blok{
+    margin: 0px;
+}
+
 .pribor_item img,
 .answer_blok img{
     width: 100%;
@@ -56,14 +91,22 @@ body{
 .answer_blok.wrong{
     border-color: red;
 }
+.strow.win{
+    color:green
+}
+.strow.wrong{
+    color:red
+}
 
 .res_img{
     position: absolute;
+    width: 1500px !important;
 }
 .checklist{
-    position: absolute;
-    width: 250px;
-    left: 135vh;
+    /* width: 350px; */
+    background-color: bisque;
+    height: 100vh;
+    padding: 0px 30px;
 }
 .checklist ul{
     padding: 10px;
@@ -74,7 +117,16 @@ body{
     padding: 10px;
     border-radius: 30px;
     position: absolute;
-    top: 60vh;
-    right: 60vh;
+    right: 430px;
+    bottom: 280px;
 }
-
+.dedmoroz_fon{
+    position: absolute;
+    z-index: 100;
+    right: 0px;
+    bottom: 0px;
+    width: 30%;
+}
+.dedmoroz_fon img{
+    width: 100%;
+}
