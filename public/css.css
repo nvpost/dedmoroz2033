@@ -6,25 +6,28 @@
 }
 .pribor_item_place{
     display: flex;
-    width: 600px;
+    width: 650px;
     border: 1px solid;
     flex-wrap: wrap;
 }
 
-.pribor_item{
-    border: 1px solid;
-    margin: 5px;
-    padding: 3px;
-}
 
 .right_side{
     display: flex;
     align-items: center;
 }
-.answer_blok{
+.answer_blok,
+.pribor_item{
     width: 100px;
     height: 100px;
-    border: 1px solid;
+    border: 3px solid;
     margin: 5px;
     padding: 3px;
+    border-color: gray;
+}
+.answer_blok.win{
+    border-color: green;
+}
+.answer_blok.wrong{
+    border-color: red;
 }
