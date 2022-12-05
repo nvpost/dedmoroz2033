@@ -1,14 +1,35 @@
+@font-face {
+    font-family: 'Comic';
+    src: url('./libs/Comic\ Sans\ MS.ttf');
+    font-weight: normal;
+    font-style: normal;
+}
+body{
+    margin: 0px;
+    font-family:'Comic';
+}
+#app{
+    font-family:'Comic';
+    background-image: url('./imgs/level1.png');
+    background-repeat: no-repeat;
+    /* background-position: center; */
+    height: 100vh;
+}
 #app p{
     margin: 0px;
+    
 }
 .pribor_panel{
     display: flex;
+    position: absolute;
+    bottom: 0px;
 }
 .pribor_item_place{
     display: flex;
-    width: 650px;
-    border: 1px solid;
+    width: 400px;
+    /* border: 1px solid; */
     flex-wrap: wrap;
+    
 }
 
 
@@ -18,12 +39,16 @@
 }
 .answer_blok,
 .pribor_item{
-    width: 100px;
-    height: 100px;
+    width: 7vh;
+    height: 7vh;
     border: 3px solid;
     margin: 5px;
     padding: 3px;
     border-color: gray;
+}
+.pribor_item img,
+.answer_blok img{
+    width: 100%;
 }
 .answer_blok.win{
     border-color: green;
@@ -31,3 +56,25 @@
 .answer_blok.wrong{
     border-color: red;
 }
+
+.res_img{
+    position: absolute;
+}
+.checklist{
+    position: absolute;
+    width: 250px;
+    left: 135vh;
+}
+.checklist ul{
+    padding: 10px;
+}
+.ded_moroz_cloud{
+    background-color: #fff;
+    max-width: 50vw;
+    padding: 10px;
+    border-radius: 30px;
+    position: absolute;
+    top: 60vh;
+    right: 60vh;
+}
+

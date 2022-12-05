@@ -1,5 +1,8 @@
 <template>
-    {{level_data}}
+    
+  <ResultField :status="status" :level="level"/>
+  <CheckList />
+  <DedMorozSay :words="words"/>
 <div class="pribor_panel">
     
     <div class="left_side">
@@ -12,7 +15,7 @@
                 :id="'wrapper_'+devises_id"
             >
 
-                    <img :src="'imgs/pribor/'+devises_id+'.png'" :id="devises_id"
+                    <img :src="'imgs/'+level+'/pribor/'+devises_id+'.png'" :id="devises_id"
                         draggable="true"
                         @dragstart="dragStart"
                     >
@@ -35,15 +38,32 @@
 </template>
 
 <script>
+import ResultField from './ResultField.vue'
+import CheckList from './CheckList.vue'
+import DedMorozSay from './DedMorozSay.vue'
+
 export default{
     name: 'game_field',
+    components:{
+        ResultField,
+        CheckList,
+        DedMorozSay
+    },
     data(){
         return{
-            // level_data: this.$store.state.level1,
-            level_data: this.$store.state['level'+this.$store.state.level],
+            level: 'level'+this.$store.state.level,
+            level_data: {},
             devise_ids:[0, 0],
-            level_class: 'slable'
+            level_class: 'slable',
+            status: false,
+            words: ""
         }
+    },
+    created(){
+        this.level_data = this.$store.state.levels[this.level]
+        this.status = this.$store.state.levels[this.level].status
+        this.words = this.level_data.text
+        // document.querySelector('#app').style.backgroundImage = "url(./imgs/" + this.level + ".png)"
     },
     methods:{
         dragStart(event)  {
@@ -86,14 +106,12 @@ export default{
                 
                 console.log(this.devise_ids)
                 
-                
-                
 
               },
         check_place(){
             let rules = this.level_data.rule_id
             let check_flag = this.devise_ids.every(function(element, index) {
-                console.log(index, element)
+
                 return parseInt(element) === parseInt(rules[index])
             })
             console.log(check_flag)
@@ -107,9 +125,18 @@ export default{
             }else{
                 console.log('all_ok')
                 this.level_class='win'
+                this.youWin()
             }
             return check_flag
         },
+        youWin(){
+            this.$store.state.levels[this.level].status = true
+
+            this.status = this.$store.state.levels[this.level].status
+
+            this.words="Молодец!!!"
+        }
+        
            
     }
     
