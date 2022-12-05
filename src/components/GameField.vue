@@ -39,8 +39,9 @@ export default{
     name: 'game_field',
     data(){
         return{
-            level_data: this.$store.state.level1,
-            devise_ids:[],
+            // level_data: this.$store.state.level1,
+            level_data: this.$store.state['level'+this.$store.state.level],
+            devise_ids:[0, 0],
             level_class: 'slable'
         }
     },
@@ -50,10 +51,7 @@ export default{
                 console.log(event.target.id)
                 // console.log('dragStart')
               },
-        dragging(event) {
-                document.getElementById("demo").innerHTML =
-                  "The p element is being dragged"+event;
-              },
+
         allowDrop(event) {
                 event.preventDefault();
               },
@@ -62,22 +60,26 @@ export default{
 
                 
                 var devise_id = event.dataTransfer.getData("id")
+                let position = event.target.getAttribute('data-id')
+                console.log(position)
                 // console.log('devise_id', devise_id)
 
                 this.level_class='stable'
                 if(event.target.classList[0]=='answer_blok' 
                  && !event.target.classList.contains('filled')){
-                    this.devise_ids.push(devise_id)
+                    this.devise_ids[position] = devise_id
 
                     event.target.classList.add('filled')
-                    console.log('addclass', event.target.classList)
+                    
                     event.target.appendChild(document.getElementById(devise_id))
-                    if(this.devise_ids.length==2){
+                    if(this.devise_ids[0]!=0 && this.devise_ids[1]!=0){
                         this.check_place()
                     }
                 }else if(event.target.classList[0]=='pribor_item' ){
                     event.target.classList.remove('filled')
-                    this.devise_ids.splice(this.devise_ids.indexOf(devise_id), 1)
+                    // this.devise_ids.splice(this.devise_ids.indexOf(devise_id), 1)
+                    position = this.devise_ids.indexOf(devise_id)
+                    this.devise_ids[position] = 0
                     event.target.appendChild(document.getElementById(devise_id))
                 }
 
@@ -106,7 +108,6 @@ export default{
                 console.log('all_ok')
                 this.level_class='win'
             }
-            console.log()
             return check_flag
         },
            
