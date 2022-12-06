@@ -1,10 +1,21 @@
 <template>
-    <div class="checklist">
-        <h2>Список дел</h2>
-        <ul>
-            <li v-for="(level, key) in levels" :key="key">{{level.title}}</li>
-        </ul>
-    </div>
+    <div class="left_nodebook_panel">
+        <div class="checklist">
+            <h2>Список дел</h2>
+            <ul>
+                <li v-for="(level, key, idx) in levels" :key="key"
+                @click="setLevel(idx)"    
+                >
+                    {{level.title}}
+                </li>
+            </ul>
+        </div>
+
+        <div class="dedmoroz_fon">
+            <img src="imgs/dedmoroz.png">
+        </div>
+
+</div>
     
 </template>
 
@@ -17,6 +28,14 @@ export default{
     data(){
         return{
             levels: this.$store.state.levels
+        }
+    },
+    methods:{
+        setLevel(idx){
+            let level=idx+1
+            console.log(level)
+            this.$store.state.level=level
+            this.$emit('level_emit')
         }
     }
 }

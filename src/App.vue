@@ -1,9 +1,7 @@
 <template>
 
   <GameField/>
-  <div class="dedmoroz_fon">
-    <img src="imgs/dedmoroz.png">
-  </div>
+
 </template>
 
 <script>

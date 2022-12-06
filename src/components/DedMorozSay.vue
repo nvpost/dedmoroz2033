@@ -1,6 +1,6 @@
 <template>
-    <div class="ded_moroz_cloud">
-        {{words}}
+    <div class="ded_moroz_cloud" v-html="words">
+
     </div>
     
 </template>

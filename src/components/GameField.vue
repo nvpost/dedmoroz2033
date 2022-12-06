@@ -1,44 +1,47 @@
 <template>
+<div class="game_field">
    <div class="game_wrapper">
-    <ResultField :status="status" :level="level"/>
-    <CheckList />
-</div>
-  <DedMorozSay :words="words"/>
-<div class="pribor_panel">
-    
-    <div class="left_side">
-        <div class="pribor_item_place">
-            <div class="pribor_item" 
+        <ResultField :status="status" :level="level"/>
+        
+        <div class="pribor_panel">
             
-                v-for="(devises_id, key) in level_data.devises_id" :key="key"
-                @drop="drop"
-                @dragover="allowDrop"
-                :id="'wrapper_'+devises_id"
-            >
-
-                    <img :src="'imgs/'+level+'/pribor/'+devises_id+'.png'" :id="devises_id"
-                        draggable="true"
-                        @dragstart="dragStart"
+            <div class="left_side">
+                <div class="pribor_item_place">
+                    <div class="pribor_item" 
+                    
+                        v-for="(devises_id, key) in level_data.devise_range" :key="key"
+                        @drop="drop"
+                        @dragover="allowDrop"
+                        :id="'wrapper_'+devises_id"
                     >
-                
-                
+
+                            <img :src="'imgs/'+level+'/pribor/'+devises_id+'.png'" :id="devises_id"
+                                draggable="true"
+                                @dragstart="dragStart"
+                            >
+                        
+                        
+                    </div>
+                </div> 
             </div>
-        </div> 
+            <div class="middle_side">
+                &#10140;
+            </div>
+            <div class="right_side">
+                <div :class="('answer_blok ' + level_class)" data-id="0"
+                    @drop="drop"
+                    @dragover="allowDrop"
+                ></div>
+                <div :class="('strow ' + level_class)">&#8213;</div>
+                <div :class="('answer_blok ' + level_class)" data-id="1"
+                    @drop="drop"
+                    @dragover="allowDrop"
+                ></div>
+            </div>
+        </div>
     </div>
-    <div class="middle_side">
-        &#10140;
-    </div>
-    <div class="right_side">
-        <div :class="('answer_blok ' + level_class)" data-id="0"
-            @drop="drop"
-            @dragover="allowDrop"
-        ></div>
-        <div :class="('strow ' + level_class)">&#8213;</div>
-        <div :class="('answer_blok ' + level_class)" data-id="1"
-            @drop="drop"
-            @dragover="allowDrop"
-        ></div>
-    </div>
+    <CheckList @level_emit="change_level"/>
+    <DedMorozSay :words="words"/>
 </div>
 </template>
 
@@ -69,8 +72,17 @@ export default{
         this.status = this.$store.state.levels[this.level].status
         this.words = this.level_data.text
         // document.querySelector('#app').style.backgroundImage = "url(./imgs/" + this.level + ".png)"
+
     },
+
     methods:{
+        change_level(){
+            
+            this.level = 'level'+this.$store.state.level,
+            this.level_data = this.$store.state.levels[this.level]
+            this.status = this.$store.state.levels[this.level].status
+            this.words = this.level_data.text
+        },
         dragStart(event)  {
                 event.dataTransfer.setData("id", event.target.id)
                 console.log(event.target.id)
@@ -90,6 +102,8 @@ export default{
                 // console.log('devise_id', devise_id)
 
                 this.level_class='stable'
+                this.words=this.text
+
                 if(event.target.classList[0]=='answer_blok' 
                  && !event.target.classList.contains('filled')){
                     this.devise_ids[position] = devise_id
@@ -126,6 +140,7 @@ export default{
                 // })
                 // this.devise_ids=[]
                 this.level_class='wrong'
+                this.words=this.level_data.wrong_text
 
             }else{
                 console.log('all_ok')
@@ -135,19 +150,21 @@ export default{
             return check_flag
         },
         youWin(){
+            // this.$store.state.levels[this.level].status = !this.$store.state.levels[this.level].status 
+            // this.status = this.$store.state.levels[this.level].status
             let i = 0
             let blink_interval = setInterval(()=>{
                 this.$store.state.levels[this.level].status = !this.$store.state.levels[this.level].status 
-
                 this.status = this.$store.state.levels[this.level].status
                 i++
-            }, 100)
-            if(i==100){
-                clearInterval(blink_interval)
-            }
+                if(i>10){
+                    clearInterval(blink_interval)
+                }
+            }, 300)
 
 
-            this.words="Молодец!!!"
+
+            this.words=this.level_data.win_text
         }
         
            

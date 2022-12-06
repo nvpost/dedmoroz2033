@@ -7,6 +7,7 @@
 body{
     margin: 0px;
     font-family:'Comic';
+    transition: all 0.3s;
 }
 #app{
     font-family:'Comic';
@@ -20,12 +21,12 @@ body{
     margin: 0px;
     
 }
-.game_wrapper{
+.game_field{
     display: flex;
 }
 .game_main_field_wrapper,
 .onoff_field{
-    height: 800px;
+    /* height: 800px; */
     width: 1400px;
     flex: 1;
     min-width: 1400px;
@@ -37,12 +38,13 @@ body{
     top: 0px;
     left: 0px;
 }
-.game_main_field_wrapper img{
+.game_main_field_wrapper img,
+.res_img{
     width: 100%;
 }
 .pribor_panel{
     display: flex;
-    position: absolute;
+    /* position: absolute; */
     bottom: 0px;
 }
 .pribor_item_place{
@@ -91,6 +93,7 @@ body{
 .answer_blok.wrong{
     border-color: red;
 }
+
 .strow.win{
     color:green
 }
@@ -100,16 +103,30 @@ body{
 
 .res_img{
     position: absolute;
-    width: 1500px !important;
+    width: 1400px !important;
 }
-.checklist{
+.left_nodebook_panel{
     /* width: 350px; */
     background-color: bisque;
-    height: 100vh;
+    justify-content: space-between;
+    /* height: 100vh; */
+    /* padding: 0px 30px; */
+    flex-direction: column;
+    display: flex;
+}
+.checklist{
     padding: 0px 30px;
 }
+
 .checklist ul{
     padding: 10px;
+}
+.checklist li{
+    cursor: pointer;
+    
+}
+.checklist li:hover{
+    text-shadow: 2px 2px 0px #ccc;
 }
 .ded_moroz_cloud{
     background-color: #fff;
@@ -118,14 +135,16 @@ body{
     border-radius: 30px;
     position: absolute;
     right: 430px;
-    bottom: 280px;
+    top: 600px;
 }
 .dedmoroz_fon{
-    position: absolute;
+    width: 120%;
+    transform: translate(-90px, 0px);
+    /* position: absolute;
     z-index: 100;
     right: 0px;
     bottom: 0px;
-    width: 30%;
+    width: 30%; */
 }
 .dedmoroz_fon img{
     width: 100%;

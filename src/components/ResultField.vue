@@ -1,7 +1,7 @@
 <template>
 <div class="game_main_field_wrapper">
         <div  class="game_main_field">
-            <img :src="'./imgs/'+level+'/level_fon1.png'">
+            <img :src="'./imgs/'+level+'/fon.png'">
 
         </div>
 
