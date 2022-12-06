@@ -33,7 +33,6 @@ export default{
     methods:{
         setLevel(idx){
             let level=idx+1
-            console.log(level)
             this.$store.state.level=level
             this.$emit('level_emit')
         }

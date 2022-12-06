@@ -37,6 +37,13 @@
                     @drop="drop"
                     @dragover="allowDrop"
                 ></div>
+                <template v-if="(this.level_data.rule_id.length==3)">
+                    <div :class="('strow ' + level_class)">&#8213;</div>
+                    <div :class="('answer_blok ' + level_class)" data-id="3"
+                        @drop="drop"
+                        @dragover="allowDrop"
+                    ></div>
+                </template>    
             </div>
         </div>
     </div>
@@ -50,6 +57,7 @@ import ResultField from './ResultField.vue'
 import CheckList from './CheckList.vue'
 import DedMorozSay from './DedMorozSay.vue'
 
+
 export default{
     name: 'game_field',
     components:{
@@ -59,30 +67,64 @@ export default{
     },
     data(){
         return{
-            level: 'level'+this.$store.state.level,
+            level: "",
             level_data: {},
-            devise_ids:[0, 0],
+            devise_ids:[],
             level_class: 'slable',
             status: false,
-            words: ""
+            words: "",
+            blink_interval: null
         }
     },
     created(){
-        this.level_data = this.$store.state.levels[this.level]
-        this.status = this.$store.state.levels[this.level].status
-        this.words = this.level_data.text
-        // document.querySelector('#app').style.backgroundImage = "url(./imgs/" + this.level + ".png)"
+        // this.level= 'level'+this.$store.state.level,
+        // this.level_data = this.$store.state.levels[this.level]
+        // this.status = this.$store.state.levels[this.level].status
+        // this.words = this.level_data.text
+
+        // this.level_data.rule_id.forEach(()=>{
+        //     this.devise_ids.push(0)
+        // })
+        this.setValues()
+        
+
 
     },
 
     methods:{
         change_level(){
             
-            this.level = 'level'+this.$store.state.level,
+            this.devise_ids.forEach(i=>{
+                document.getElementById('wrapper_'+i).appendChild(document.getElementById(i))
+            })
+            this.devise_ids=[]
+            clearInterval(this.blink_interval)
+
+            this.setValues()
+            
+            // this.level = 'level'+this.$store.state.level,
+            // this.level_data = this.$store.state.levels[this.level]
+            // this.status = this.$store.state.levels[this.level].status
+            // this.words = this.level_data.text
+
+            // this.level_class= 'slable'
+            // this.status = false
+        },
+
+        setValues(){
+            this.level= 'level'+this.$store.state.level,
             this.level_data = this.$store.state.levels[this.level]
             this.status = this.$store.state.levels[this.level].status
             this.words = this.level_data.text
+
+            this.level_class= 'slable'
+            this.status = false
+
+            this.level_data.rule_id.forEach(()=>{
+                this.devise_ids.push(0)
+            })
         },
+
         dragStart(event)  {
                 event.dataTransfer.setData("id", event.target.id)
                 console.log(event.target.id)
@@ -102,7 +144,7 @@ export default{
                 // console.log('devise_id', devise_id)
 
                 this.level_class='stable'
-                this.words=this.text
+                this.words=this.level_data.text
 
                 if(event.target.classList[0]=='answer_blok' 
                  && !event.target.classList.contains('filled')){
@@ -111,6 +153,12 @@ export default{
                     event.target.classList.add('filled')
                     
                     event.target.appendChild(document.getElementById(devise_id))
+
+                    // если нет нулевых значений пока не работает
+                    // let noZerroFlag = false
+                    let tmpArr = this.devise_ids.sort()
+                    console.log('tmpArr',tmpArr)
+                    console.log('this.devise_ids',this.devise_ids)
                     if(this.devise_ids[0]!=0 && this.devise_ids[1]!=0){
                         this.check_place()
                     }
@@ -135,10 +183,7 @@ export default{
             })
             console.log(check_flag)
             if(!check_flag){
-                // this.devise_ids.forEach(i=>{
-                //     document.getElementById('wrapper_'+i).appendChild(document.getElementById(i))
-                // })
-                // this.devise_ids=[]
+
                 this.level_class='wrong'
                 this.words=this.level_data.wrong_text
 
@@ -153,12 +198,12 @@ export default{
             // this.$store.state.levels[this.level].status = !this.$store.state.levels[this.level].status 
             // this.status = this.$store.state.levels[this.level].status
             let i = 0
-            let blink_interval = setInterval(()=>{
+            this.blink_interval = setInterval(()=>{
                 this.$store.state.levels[this.level].status = !this.$store.state.levels[this.level].status 
                 this.status = this.$store.state.levels[this.level].status
                 i++
                 if(i>10){
-                    clearInterval(blink_interval)
+                    clearInterval(this.blink_interval)
                 }
             }, 300)
 
