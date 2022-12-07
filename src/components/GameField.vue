@@ -6,9 +6,9 @@
         <div class="pribor_panel">
             
             <div class="left_side">
-                <div class="pribor_item_place">
+                <div class="pribor_item_place" :style="'width: '+level_data.devise_range*61+'px'">
                     <div class="pribor_item" 
-                    
+
                         v-for="(devises_id, key) in level_data.devise_range" :key="key"
                         @drop="drop"
                         @dragover="allowDrop"
@@ -77,18 +77,8 @@ export default{
         }
     },
     created(){
-        // this.level= 'level'+this.$store.state.level,
-        // this.level_data = this.$store.state.levels[this.level]
-        // this.status = this.$store.state.levels[this.level].status
-        // this.words = this.level_data.text
-
-        // this.level_data.rule_id.forEach(()=>{
-        //     this.devise_ids.push(0)
-        // })
         this.setValues()
-        
-
-
+    
     },
 
     methods:{

@@ -26,7 +26,15 @@ export let levels = {
         onOffPosition: {left: '0px', top: '0px'}
     },
     level3:{
-        title: 'level3', 
+        devise_range: 8,
+        rule_id: [2, 5],
+        onOffRules: 'reverce',
+        status: false,
+        title: 'Сварить крафтовый лимонад',
+        text: '<b>Наварю лимонада, чтобы всем хватило…</b><p>Чтобы лимонад не вытекал, очень важно, контролировать уровень и управлять им!</p>',
+        win_text: 'Лимонад под контролем!<br>Ты верно подобрал устройства ОВЕН для контроля и управления уровнем!',
+        wrong_text: 'Ой-ой! Лимонад вытекает!',
+        onOffPosition: {left: '0px', top: '0px'}
     },
     level4:{
         title: 'level4', 
