@@ -48,6 +48,9 @@ export default {
             if (this.rules == 'blink'){
                 this.blink()
             }
+            if (this.rules == 'noReaction'){
+                this.rule=false
+            }
             
         },
         blink(){
