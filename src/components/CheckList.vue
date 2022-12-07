@@ -4,7 +4,8 @@
             <h2>Список дел</h2>
             <ul>
                 <li v-for="(level, key, idx) in levels" :key="key"
-                @click="setLevel(idx)"    
+                @click="setLevel(idx)"  
+                :class="level.status=='win'? 'win': false"  
                 >
                     {{level.title}}
                 </li>

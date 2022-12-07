@@ -120,18 +120,44 @@ body{
     display: flex;
 }
 .checklist{
-    padding: 0px 30px;
+    padding: 0px 20px;
 }
 
 .checklist ul{
     padding: 10px;
+    list-style-type: none;
 }
 .checklist li{
     cursor: pointer;
+    font-size: 20px;
+    margin-bottom: 10px;
+    line-height: 20px;
     
 }
+
 .checklist li:hover{
     text-shadow: 2px 2px 0px #ccc;
+}
+
+.checklist ul li.win{
+    opacity: 0.5;
+}
+.checklist ul li:before {
+    content: '\1809';
+    color: #000;
+    margin-right: 10px;
+    font-size: 22px;
+    line-height: 0px;
+    font-weight: bold;
+}
+
+
+
+.checklist ul li.win:before {
+    content: '\2713';
+    color: green;
+    margin-right: 10px;
+
 }
 .ded_moroz_cloud{
     background-color: #fff;
