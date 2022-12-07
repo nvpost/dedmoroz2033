@@ -47,7 +47,7 @@
             </div>
         </div>
     </div>
-    <CheckList @level_emit="change_level"/>
+    <CheckList @level_emit="change_level" :current_level="level"/>
     <DedMorozSay :words="words"/>
 </div>
 </template>
