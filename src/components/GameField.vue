@@ -1,7 +1,7 @@
 <template>
 <div class="game_field">
    <div class="game_wrapper">
-        <ResultField :status="status" :level="level"/>
+        <ResultField :status="status" :level="level" :rules="level_data.onOffRules"/>
         
         <div class="pribor_panel">
             
@@ -39,7 +39,7 @@
                 ></div>
                 <template v-if="(this.level_data.rule_id.length==3)">
                     <div :class="('strow ' + level_class)">&#8213;</div>
-                    <div :class="('answer_blok ' + level_class)" data-id="3"
+                    <div :class="('answer_blok ' + level_class)" data-id="2"
                         @drop="drop"
                         @dragover="allowDrop"
                     ></div>
@@ -93,9 +93,9 @@ export default{
 
     methods:{
         change_level(){
-            
+            // Добавить возможность перехода без перетаскивания
             this.devise_ids.forEach(i=>{
-                document.getElementById('wrapper_'+i).appendChild(document.getElementById(i))
+                i>0 ? document.getElementById('wrapper_'+i).appendChild(document.getElementById(i)): false
             })
             this.devise_ids=[]
             clearInterval(this.blink_interval)
@@ -146,6 +146,9 @@ export default{
                 this.level_class='stable'
                 this.words=this.level_data.text
 
+                this.$store.state.levels[this.level].status = false
+                this.status = this.$store.state.levels[this.level].status
+
                 if(event.target.classList[0]=='answer_blok' 
                  && !event.target.classList.contains('filled')){
                     this.devise_ids[position] = devise_id
@@ -155,11 +158,13 @@ export default{
                     event.target.appendChild(document.getElementById(devise_id))
 
                     // если нет нулевых значений пока не работает
-                    // let noZerroFlag = false
-                    let tmpArr = this.devise_ids.sort()
+                    
+                    // Добавить проверку на перетаскивание из существуещего блока
+                    let tmpArr = this.devise_ids.slice()
+                    tmpArr = tmpArr.sort()
                     console.log('tmpArr',tmpArr)
                     console.log('this.devise_ids',this.devise_ids)
-                    if(this.devise_ids[0]!=0 && this.devise_ids[1]!=0){
+                    if(tmpArr[0]!=0){
                         this.check_place()
                     }
                 }else if(event.target.classList[0]=='pribor_item' ){
@@ -171,47 +176,46 @@ export default{
                 }
 
                 
-                console.log(this.devise_ids)
+                // console.log(this.devise_ids)
                 
 
               },
         check_place(){
             let rules = this.level_data.rule_id
+            let alt_rules = this.level_data.alt_rule_id
+            console.log(rules)
             let check_flag = this.devise_ids.every(function(element, index) {
-
                 return parseInt(element) === parseInt(rules[index])
             })
-            console.log(check_flag)
-            if(!check_flag){
+            let alt_check_flag = false
+            if(alt_rules){
 
-                this.level_class='wrong'
-                this.words=this.level_data.wrong_text
-
-            }else{
-                console.log('all_ok')
-                this.level_class='win'
-                this.youWin()
+                console.log('alt_rules')
+                alt_check_flag = this.devise_ids.every(function(element, index) {
+                    return parseInt(element) === parseInt(alt_rules[index])
+                })
             }
+            console.log(alt_check_flag)
+
+            check_flag || alt_check_flag ? this.youWin() : this.youLose()
+
             return check_flag
         },
         youWin(){
-            // this.$store.state.levels[this.level].status = !this.$store.state.levels[this.level].status 
-            // this.status = this.$store.state.levels[this.level].status
-            let i = 0
-            this.blink_interval = setInterval(()=>{
-                this.$store.state.levels[this.level].status = !this.$store.state.levels[this.level].status 
-                this.status = this.$store.state.levels[this.level].status
-                i++
-                if(i>10){
-                    clearInterval(this.blink_interval)
-                }
-            }, 300)
+            this.$store.state.levels[this.level].status = 'win'
+            this.status = this.$store.state.levels[this.level].status
 
-
+            this.level_class='win'
 
             this.words=this.level_data.win_text
+        },
+        youLose(){
+            this.$store.state.levels[this.level].status = 'lose'
+            this.status = this.$store.state.levels[this.level].status
+
+            this.level_class='wrong'
+            this.words=this.level_data.wrong_text
         }
-        
            
     }
     
