@@ -32,11 +32,13 @@
                     @drop="drop"
                     @dragover="allowDrop"
                 ></div>
-                <div :class="('strow ' + level_class)">&#8213;</div>
-                <div :class="('answer_blok ' + level_class)" data-id="1"
-                    @drop="drop"
-                    @dragover="allowDrop"
-                ></div>
+                <template v-if="(this.level_data.rule_id.length>1)">
+                    <div :class="('strow ' + level_class)">&#8213;</div>
+                    <div :class="('answer_blok ' + level_class)" data-id="1"
+                        @drop="drop"
+                        @dragover="allowDrop"
+                    ></div>
+                </template>
                 <template v-if="(this.level_data.rule_id.length==3)">
                     <div :class="('strow ' + level_class)">&#8213;</div>
                     <div :class="('answer_blok ' + level_class)" data-id="2"

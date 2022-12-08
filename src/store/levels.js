@@ -49,10 +49,26 @@ export let levels = {
         onOffPosition: {left: '0px', top: '0px'}
     },
     level5:{
-        title: 'level5', 
+        devise_range: 8,
+        rule_id: [3, 4],
+        onOffRules: 'regular',
+        status: false,
+        title: 'Подобрать автоматику в котельную',
+        text: '<p>Холодает…<br>Задача: Подобрать автоматику, исходя из данных: в каждой котельной 4 котла с модулируемыми горелками каждый. У каждого котла имеется котловой насос. Эти котлы должны работать в каскаде.</p>',
+        win_text: 'Теперь хоть тепло будет к вечеру 31 декабря',
+        wrong_text: 'Это, определенно, не то…',
+        onOffPosition: {left: '0px', top: '0px'}
     },
     level6:{
-        title: 'level6', 
+        devise_range: 8,
+        rule_id: [4],
+        onOffRules: 'regular',
+        status: false,
+        title: 'Управлять отоплением и ГВС',
+        text: '<p>Все еще недостаточно тепло<br>Задача: Управлять отоплением, клапаном и насосом подпитки, и обязательно, чтобы реле не щелкало, а то олень пугается.</p>',
+        win_text: 'Тепло, и олень не нервничает',
+        wrong_text: 'Это, определенно, не то…',
+        onOffPosition: {left: '0px', top: '0px'}
     },
     level7:{
         title: 'level7', 

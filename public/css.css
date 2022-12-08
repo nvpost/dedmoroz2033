@@ -8,6 +8,7 @@ body{
     margin: 0px;
     font-family:'Comic';
     transition: all 0.3s;
+    background-image: url('./imgs/pattern.png')
 }
 #app{
     font-family:'Comic';
@@ -126,6 +127,10 @@ body{
 .checklist ul{
     padding: 10px;
     list-style-type: none;
+    justify-content: space-between;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
 }
 .checklist li{
     cursor: pointer;
