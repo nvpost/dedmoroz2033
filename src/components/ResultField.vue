@@ -5,7 +5,7 @@
 
         </div>
 
-        <img :src="'./imgs/'+level+'/on.png'" class="res_img" 
+        <img :src="'./imgs/'+level+'/on.'+(this.rules=='gif'?'gif':'png')" class="res_img" 
         :style="onStyle"
         v-if="(status=='win' && rule)">
 

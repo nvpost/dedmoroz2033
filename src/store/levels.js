@@ -71,7 +71,15 @@ export let levels = {
         onOffPosition: {left: '0px', top: '0px'}
     },
     level7:{
-        title: 'level7', 
+        devise_range: 6,
+        rule_id: [2],
+        onOffRules: 'gif',
+        status: false,
+        title: 'Управлять приточной вентиляцией',
+        text: '<p>Все еще недостаточно тепло<br>Задача: Управлять приточной вентиляцией. Условия: нагреватель водяной, на приточном воздухе стоит датчик ДТС405Л-50М.В3.200. Глубина щита ограничена.</p>',
+        win_text: 'Мм…свежий воздух!',
+        wrong_text: 'Это, определенно, не то…',
+        onOffPosition: {left: '0px', top: '0px'}
     },
 
     level8:{
