@@ -52,8 +52,8 @@ export let levels = {
     },
     level4:{
         devise_range: 12,
-        rule_id: [7, 6],
-        alt_rule_id: [10, 6],
+        rule_id: [7, 10, 6],
+        alt_rule_id: [10, 7, 6],
         onOffRules: 'noReaction',
         status: false,
         title: 'Рассортировать подарки',
