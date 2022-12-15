@@ -8,25 +8,35 @@ body{
     margin: 0px;
     font-family:'Comic';
     transition: all 0.3s;
-    background-image: url('./imgs/pattern.png')
+
+}
+a{
+    text-decoration: none;
 }
 #app{
     font-family:'Comic';
     /*background-image: url('imgs/dedmoroz.png');
      background-repeat: no-repeat;
     background-position: center; */
-    height: 100vh;
-    width: 1560px;
-    margin:auto;
+    min-height: 100vh;
+    height: 100%;
+    /* width: 1560px;
+    margin:auto; */
+    background-image: url('./imgs/pattern.png')
 }
 
 #app p{
     margin: 0px;
     
 }
+.game_view{
+    
+}
 .game_field{
     display: flex;
     background-color: #ccc;
+    width: 1560px;
+    margin: auto;
 }
 .game_main_field_wrapper,
 .onoff_field{
@@ -64,6 +74,7 @@ body{
 .right_side{
     display: flex;
     align-items: center;
+    z-index: 100;
 }
 .middle_side{
     display: flex;
@@ -113,6 +124,7 @@ body{
 }
 .left_nodebook_panel{
     /* width: 350px; */
+    position: relative;
     background-color: bisque;
     justify-content: space-between;
     /* height: 100vh; */
@@ -134,7 +146,7 @@ body{
 }
 .checklist li{
     cursor: pointer;
-    font-size: 20px;
+    font-size: 18px;
     margin-bottom: 10px;
     line-height: 20px;
     
@@ -174,14 +186,84 @@ body{
     top: 600px;
 }
 .dedmoroz_fon{
-    width: 120%;
-    transform: translate(-90px, 0px);
-    /* position: absolute;
-    z-index: 100;
-    right: 0px;
+    position: absolute;
+    /* width: 120%; */
+    height: 420px;
+    transform: translate(0px, 5px);
     bottom: 0px;
-    width: 30%; */
+    right: 0px;
 }
 .dedmoroz_fon img{
-    width: 100%;
+    height: 100%;
 }
+
+
+
+
+/* regular pages */
+
+.bottom{
+    background-color: #008f86;
+    height: 10vh;
+    min-height: 150px;
+    position: fixed;
+    bottom: 0px;
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+  }
+  .logo{
+    padding:10px;
+  }
+  .dedmoroz{
+    height: 800px;
+  }
+  
+  
+  .main_cloud_wrapper{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding-top: 20vh;
+  }
+  
+  .main_cloud{
+    bottom: 400px;
+    left: 300px;
+    width: 600px; 
+    padding: 20px;
+    text-transform: uppercase;
+    background-color: #008f86;
+    font-size: 54px;
+    color: white;
+    text-align: center;
+    font-weight: 600;
+    border-radius: 20px;
+    box-shadow: 6px 5px 10px 0 #858585;
+  
+  }
+  .main_btn_field{
+    display: flex;
+    flex-direction: column;
+    margin-left: 52vw;
+  }
+  .btn{
+    background-color: #008f86;
+    font-size: 24px;
+    font-weight: 600;
+    padding:15px;
+    border-radius: 10px; 
+    margin: 20px;
+    color:#fff;
+    width: 200px;
+    text-align: center;
+    text-transform: uppercase;
+    box-shadow: 6px 5px 10px 0 #858585;
+    cursor: pointer;
+    transition: all 0.3s;
+  
+  }
+  .btn:hover{
+    box-shadow:none
+  }

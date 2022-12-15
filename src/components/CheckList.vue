@@ -14,8 +14,15 @@
         </div>
 
         <div class="dedmoroz_fon">
-            <img src="imgs/dedmoroz.png">
+            
+            <img :src="'imgs/'+current_level+'/dedCloudOn.png'" v-if="(current_level=='level9' && levels[current_level].status=='win')">
+            <img :src="'imgs/'+current_level+'/dedmoroz.png'" v-else>
         </div>
+
+        <!-- <div class="dedmoroz_fon" v-else>
+            <img src="imgs/dedmoroz.png" >
+            
+        </div> -->
 
 </div>
     

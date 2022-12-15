@@ -33,14 +33,14 @@
                     @dragover="allowDrop"
                 ></div>
                 <template v-if="(this.level_data.rule_id.length>1)">
-                    <div :class="('strow ' + level_class)">&#8213;</div>
+                    <div :class="('strow ' + level_class)" :style="(level=='level9'?'font-size:8px':'false')">&#8213;</div>
                     <div :class="('answer_blok ' + level_class)" data-id="1"
                         @drop="drop"
                         @dragover="allowDrop"
                     ></div>
                 </template>
                 <template v-if="(this.level_data.rule_id.length==3)">
-                    <div :class="('strow ' + level_class)">&#8213;</div>
+                    <div :class="('strow ' + level_class)" :style="(level=='level9'?'font-size:8px':'false')">&#8213;</div>
                     <div :class="('answer_blok ' + level_class)" data-id="2"
                         @drop="drop"
                         @dragover="allowDrop"
@@ -94,13 +94,6 @@ export default{
 
             this.setValues()
             
-            // this.level = 'level'+this.$store.state.level,
-            // this.level_data = this.$store.state.levels[this.level]
-            // this.status = this.$store.state.levels[this.level].status
-            // this.words = this.level_data.text
-
-            // this.level_class= 'slable'
-            // this.status = false
         },
 
         setValues(){
@@ -206,7 +199,7 @@ export default{
             this.status = this.$store.state.levels[this.level].status
 
             this.level_class='wrong'
-            this.words=this.level_data.wrong_text
+            this.words=this.level_data.wrong_texts[Math.floor(Math.random() * this.level_data.wrong_texts.length)]
         }
            
     }

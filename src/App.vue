@@ -1,19 +1,20 @@
 <template>
+  
+  <nav>
+    <router-link to="/">Главная</router-link> |
+    <router-link to="/game">Игра</router-link> |
+    <router-link to="/rule">Правила</router-link> |
+    <router-link to="/sNovymGodom">Поздравляем</router-link>
+  </nav>
+  <router-view/>
 
-  <GameField/>
-
+  
 </template>
 
-<script>
-import GameField from './components/GameField'
-// import ResultField from './components/ResultField.vue'
 
-export default {
-  name: 'App',
-  components: {
-    GameField,
-    // ResultField
-  }
-}
-</script>
 
+<style>
+
+
+
+</style>
