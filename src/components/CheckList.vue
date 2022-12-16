@@ -6,9 +6,9 @@
                 <li v-for="(level, key, idx) in levels" :key="key"
                 @click="setLevel(idx)" 
                 :style="key==current_level? 'font-weight: 600':false" 
-                :class="level.status=='win'? 'win': false"  
+                :class="$store.state.userData['level'+(idx+1)]? 'win': false"  
                 >
-                    {{level.title}}
+                   {{level.title}}
                 </li>
             </ul>
         </div>
@@ -19,16 +19,13 @@
             <img :src="'imgs/'+current_level+'/dedmoroz.png'" v-else>
         </div>
 
-        <!-- <div class="dedmoroz_fon" v-else>
-            <img src="imgs/dedmoroz.png" >
-            
-        </div> -->
 
 </div>
     
 </template>
 
 <script>
+// :class="level.status=='win'? 'win': false" 
 export default{
     name: 'CheckList',
     props: [

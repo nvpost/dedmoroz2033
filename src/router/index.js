@@ -12,6 +12,16 @@ const routes = [
   {
     path: '/game',
     name: 'GameView',
+
+    component: GameView
+  },
+
+  {
+    path: '/game',
+    name: 'StartNewGame',
+    beforeEnter:() => {
+      localStorage.removeItem('owenNG2033')
+      },
     component: GameView
   },
   {

@@ -1,6 +1,6 @@
 <template>
 <div class="game_field">
-    {{$store.state.userData[this.level]}}
+
    <div class="game_wrapper">
         <ResultField :status="status" :level="level" :rules="level_data.onOffRules"/>
         
@@ -108,28 +108,38 @@ export default{
             })
             this.devise_ids=[]
             clearInterval(this.blink_interval)
-
+            
             this.setValues()
             
         },
 
         setValues(){
+            this.$store.state.userData = JSON.parse(localStorage.getItem('owenNG2033'))?
+                JSON.parse(localStorage.getItem('owenNG2033')):[]
+
             this.level= 'level'+this.$store.state.level,
             this.level_data = this.$store.state.levels[this.level]
             this.status = this.$store.state.levels[this.level].status
-            this.words = this.level_data.status ? this.level_data.win_text : this.level_data.text
+            this.words = this.level_data.text
 
-            this.level_class= this.level_data.status ? 'win' : 'slable'
-            this.status = false
+            
 
             if(this.$store.state.userData[this.level]){
+                console.log('есть userData')
                 this.user_state = this.$store.state.userData[this.level]
+                this.level_class = 'win'
+                this.words = this.level_data.win_text
+            }else{
+                this.user_state = []
+                this.level_class = 'stable'
             }
             
 
             this.level_data.rule_id.forEach(()=>{
                 this.devise_ids.push(0)
             })
+
+            this.status = false
         },
 
         dragStart(event)  {
@@ -201,7 +211,6 @@ export default{
                     return parseInt(element) === parseInt(alt_rules[index])
                 })
             }
-            console.log(alt_check_flag)
 
             check_flag || alt_check_flag ? this.youWin() : this.youLose()
 
@@ -214,8 +223,10 @@ export default{
             this.level_class='win'
 
             this.words=this.level_data.win_text
-
+            // записываес в store
             this.status = this.$store.state.userData[this.level] = this.devise_ids
+            //записываем в localstorage
+            localStorage.setItem('owenNG2033', JSON.stringify(this.$store.state.userData))
         },
         youLose(){
             this.$store.state.levels[this.level].status = 'lose'

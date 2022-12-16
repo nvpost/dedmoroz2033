@@ -225,7 +225,7 @@ a{
     width: 100%;
     display: flex;
     justify-content: center;
-    padding-top: 20vh;
+    padding-top: 10vh;
   }
   
   .main_cloud{
@@ -246,7 +246,7 @@ a{
   .main_btn_field{
     display: flex;
     flex-direction: column;
-    margin-left: 52vw;
+    margin-left: 45.9vw;
   }
   .btn{
     background-color: #008f86;
@@ -256,7 +256,7 @@ a{
     border-radius: 10px; 
     margin: 20px;
     color:#fff;
-    width: 200px;
+    width: 350px;
     text-align: center;
     text-transform: uppercase;
     box-shadow: 6px 5px 10px 0 #858585;
