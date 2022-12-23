@@ -178,12 +178,12 @@ a{
 }
 .ded_moroz_cloud{
     background-color: #fff;
-    max-width: 50vw;
+    max-width: 30vw;
     padding: 10px;
     border-radius: 30px;
     position: absolute;
-    right: 430px;
-    top: 600px;
+    right: 560px;
+    top: 550px;
 }
 .dedmoroz_fon{
     position: absolute;
@@ -267,3 +267,13 @@ a{
   .btn:hover{
     box-shadow:none
   }
+
+  /* hide */
+
+.up_side{
+    display: none;
+}
+
+
+
+

@@ -7,11 +7,11 @@
 
         <img :src="'./imgs/'+level+'/on.'+(this.rules=='gif'?'gif':'png')" class="res_img" 
         :style="onStyle"
-        v-if="(status=='win' && rule)">
+        v-if="(level_class=='win' && rule)">
 
         <img :src="'./imgs/'+level+'/off.png'" class="res_img" 
         :style="onStyle"
-        v-if="(status=='lose' && rule)">
+        v-if="(level_class=='wrong' && rule)">
 </div>
 </template>
 
@@ -19,7 +19,7 @@
 // import DedMorozSay from './DedMorozSay.vue'
 export default {
     name: 'ResultField',
-    props:['status', 'level', 'rules'],
+    props:['status', 'level', 'rules', 'level_class'],
     // components:{
     //     DedMorozSay
     // },

@@ -2,7 +2,8 @@
 <div class="game_field">
 
    <div class="game_wrapper">
-        <ResultField :status="status" :level="level" :rules="level_data.onOffRules"/>
+
+        <ResultField :status="status" :level="level" :rules="level_data.onOffRules" :level_class="level_class"/>
         
         <div class="pribor_panel">
             
@@ -13,6 +14,7 @@
                         v-for="(devises_id, key) in level_data.devise_range" :key="key"
                         @drop="drop"
                         @dragover="allowDrop"
+                        @click="test_touchPlace"
                         :id="'wrapper_'+devises_id"
                     >
                             <img 
@@ -20,34 +22,19 @@
                                 :src="'imgs/'+level+'/pribor/'+devises_id+'.png'" :id="devises_id"
                                 draggable="true"
                                 @dragstart="dragStart"
+                                @click="test_touchPlace"
                             >
                         
                         
                     </div>
                 </div> 
             </div>
-            <!-- <div class="middle_side">
-                &#10140;
-            </div> -->
+
+            <div class="up_side">
+                &#8679;
+            </div>
+
             <div class="right_side">
-                <!-- <div :class="('answer_blok ' + level_class)" data-id="0"
-                    @drop="drop"
-                    @dragover="allowDrop"
-                ></div>
-                <template v-if="(this.level_data.rule_id.length>1)">
-                    <div :class="('strow ' + level_class)" :style="(this.level_data.rule_id.length == 3 ?'font-size:8px':'false')">&#8213;</div>
-                    <div :class="('answer_blok ' + level_class)" data-id="1"
-                        @drop="drop"
-                        @dragover="allowDrop"
-                    ></div>
-                </template>
-                <template v-if="(this.level_data.rule_id.length==3)">
-                    <div :class="('strow ' + level_class)" :style="(this.level_data.rule_id.length == 3 ?'font-size:8px':'false')">&#8213;</div>
-                    <div :class="('answer_blok ' + level_class)" data-id="2"
-                        @drop="drop"
-                        @dragover="allowDrop"
-                    ></div>
-                </template>  -->
                     <DropFielitem 
                         v-for="id in this.level_data.rule_id.length"
                         :l = "this.level_data.rule_id.length"
@@ -58,6 +45,7 @@
                         :user_state = "user_state"
                         @drop_emit="drop"
                         @dragStart_emit="dragStart"
+                        @touch_setDevice_emit="test_touchPlace"
                     />   
             </div>
         </div>
@@ -92,11 +80,13 @@ export default{
             status: false,
             user_state: [],
             words: "",
-            blink_interval: null
+            blink_interval: null,
+            touch_dataTransfer: null
         }
     },
     created(){
         this.setValues()
+        this.$store.state.isTouchScreen = 'ontouchstart' in window || navigator.msMaxTouchPoints
     
     },
 
@@ -115,20 +105,22 @@ export default{
 
         setValues(){
             this.$store.state.userData = JSON.parse(localStorage.getItem('owenNG2033'))?
-                JSON.parse(localStorage.getItem('owenNG2033')):[]
+                JSON.parse(localStorage.getItem('owenNG2033')):{}
 
             this.level= 'level'+this.$store.state.level,
             this.level_data = this.$store.state.levels[this.level]
             this.status = this.$store.state.levels[this.level].status
             this.words = this.level_data.text
+            this.touch_dataTransfer = null
 
-            
+            this.status = false
 
             if(this.$store.state.userData[this.level]){
-                console.log('есть userData')
+                // console.log('есть userData')
                 this.user_state = this.$store.state.userData[this.level]
                 this.level_class = 'win'
                 this.words = this.level_data.win_text
+                this.status = 'win'
             }else{
                 this.user_state = []
                 this.level_class = 'stable'
@@ -139,26 +131,90 @@ export default{
                 this.devise_ids.push(0)
             })
 
-            this.status = false
+            // console.log('this.$store.state.userData', this.$store.state.userData)
+
+            
         },
 
+        test_touchPlace(event){
+            if(event.target.tagName != 'IMG'){
+                this.touch_setDevice(event)
+            }
+            else{
+                this.touch_fixDevice(event)
+            }
+        },
+
+        touch_fixDevice(event){
+            this.remove_fix_class()
+            this.touch_dataTransfer = null
+            let el = event.target
+            
+            
+            let parent_el = el.closest('.pribor_item');
+            if(parent_el){
+                parent_el.classList.add('fix_class')
+            }
+            
+            this.touch_dataTransfer = el.id
+            
+        },
+
+        touch_setDevice(event){
+            if(this.touch_dataTransfer==null){
+                console.log(event.target.tagName)
+                alert('Выберете прибор')
+                return false
+            }
+            let position = event.target.dataset.id
+            let devise_id = this.touch_dataTransfer
+            this.devise_ids[position] = devise_id
+
+            
+            if(!event.target.querySelector('img')){
+                event.target.appendChild(document.getElementById(devise_id))
+
+                this.preCheck()
+            }
+
+            this.touch_dataTransfer = null
+            this.remove_fix_class()
+        },
+
+        remove_fix_class(){
+            document.querySelectorAll('.pribor_item').forEach(i=>{
+                i.classList.remove('fix_class')
+            })
+        },
+
+        
+
         dragStart(event)  {
+            this.touch_dataTransfer = null
+            console.log(event.target.id)
+            if(event.dataTransfer){
                 event.dataTransfer.setData("id", event.target.id)
-                console.log(event.target.id)
-                // console.log('dragStart')
-              },
+            }
+            this.touch_dataTransfer = event.target.id
+
+            // console.log('dragStart')
+            },
 
         allowDrop(event) {
                 event.preventDefault();
               },
         drop(event) {
+                console.log('drop')
                 event.preventDefault();
 
                 
-                var devise_id = event.dataTransfer.getData("id")
+                var devise_id = null
+
+                if(event.dataTransfer){
+                    devise_id = event.dataTransfer.getData("id")
+                }
                 let position = event.target.getAttribute('data-id')
-                // console.log(position)
-                // console.log('devise_id', devise_id, '/position', position)
+
                 console.log('event.target', event.target)
 
                 this.level_class='stable'
@@ -176,12 +232,8 @@ export default{
                     event.target.appendChild(document.getElementById(devise_id))
                  
                     // Добавить проверку на перетаскивание из существуещего блока
-                    let tmpArr = this.devise_ids.slice()
-                    tmpArr = tmpArr.sort()
+                    this.preCheck()
 
-                    if(tmpArr[0]!=0){
-                        this.check_place()
-                    }
                 }
                 else if(event.target.classList[0]=='pribor_item' )
                 {
@@ -197,6 +249,15 @@ export default{
                 
 
               },
+        preCheck(){
+            
+            let tmpArr = this.devise_ids.slice()
+            tmpArr = tmpArr.sort()
+
+            if(tmpArr[0]!=0){
+                this.check_place()
+            }
+        },
         check_place(){
             let rules = this.level_data.rule_id
             let alt_rules = this.level_data.alt_rule_id
@@ -224,9 +285,17 @@ export default{
 
             this.words=this.level_data.win_text
             // записываес в store
-            this.status = this.$store.state.userData[this.level] = this.devise_ids
+            this.status = 'win'
+            this.$store.state.userData[this.level] = this.devise_ids
+            
             //записываем в localstorage
+
+
             localStorage.setItem('owenNG2033', JSON.stringify(this.$store.state.userData))
+
+            console.log('ls', JSON.parse(localStorage.getItem('owenNG2033')))
+            
+        
         },
         youLose(){
             this.$store.state.levels[this.level].status = 'lose'
@@ -237,6 +306,7 @@ export default{
 
             this.status = this.$store.state.userData[this.level] = null
         }
+
            
     }
 }

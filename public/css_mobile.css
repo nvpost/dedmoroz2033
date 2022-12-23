@@ -1,0 +1,53 @@
+@media only screen
+and (max-width : 1200px) {
+    .game_field{
+        width: 100%;
+    }
+    .game_main_field_wrapper, .onoff_field{
+        width: 100%;
+    }
+    .game_main_field_wrapper img, .res_img{
+        width: 100% !important;
+    }
+    .left_nodebook_panel{
+        display: none;
+    }
+    .game_wrapper{
+        width: 100%;
+    }
+    .pribor_item_place{
+        width: 100% !important;
+        justify-content: space-around;
+    }
+
+    #app{
+        background-image: none;
+    }
+    .pribor_panel{
+        flex-direction: column-reverse;
+    }
+
+    .answer_blok, .pribor_item{
+        width: 14vw;
+        height: 14vw;
+        /* height: auto; */
+    }
+    
+    .middle_side{
+        display: none;
+    }
+    .up_side{
+        display: block;
+        text-align: center;
+        font-size: 36px;
+        font-weight: 800;
+    }
+    .right_side{
+        justify-content: center;
+    }
+
+    .fix_class{
+        border-color:#008f86;
+    }
+
+}

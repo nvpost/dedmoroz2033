@@ -6,9 +6,13 @@ export default createStore({
   state: {
     level:1,
     levels:levels,
-    userData:{}
+    userData:{},
+    isTouchScreen: false
   },
   getters: {
+    getUserData(state){
+      return state.userData
+    }
   },
   mutations: {
   },

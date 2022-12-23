@@ -3,7 +3,7 @@
   <div>
       <div class="main_cloud_wrapper">
           <div class="main_cloud">
-              Автоматизация новго года
+              Автоматизация нового года
           </div> 
 
       </div>
