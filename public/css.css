@@ -135,6 +135,13 @@ a{
 .checklist{
     padding: 0px 20px;
 }
+.desctop_home_route{
+    display: block;
+    position: absolute;
+    top: 0px;
+    right: 10px;
+    font-size: 52px;
+}
 
 .checklist ul{
     padding: 10px;
@@ -246,8 +253,17 @@ a{
   .main_btn_field{
     display: flex;
     flex-direction: column;
-    margin-left: 45.9vw;
+    margin-left: 21.9vw;
+    margin-top: 20px;
+    z-index: 10;
   }
+
+  .rules_buttons .main_btn_field{
+    position: fixed;
+    right: 10px;
+    top: 20vh
+  }
+
   .btn{
     background-color: #008f86;
     font-size: 24px;
@@ -256,7 +272,7 @@ a{
     border-radius: 10px; 
     margin: 20px;
     color:#fff;
-    width: 350px;
+    width: 20vw;
     text-align: center;
     text-transform: uppercase;
     box-shadow: 6px 5px 10px 0 #858585;
@@ -268,9 +284,32 @@ a{
     box-shadow:none
   }
 
+
+  .rules_field{
+    background-color: #fff;
+    width: 60%;
+    margin-left: 8vw;
+    padding: 20px;
+    position: fixed;
+    overflow-y: scroll;
+    height: 80vh;
+    top: 5vh;
+    border-radius: 20px;
+    z-index: 1;
+  }
+
   /* hide */
 
 .up_side{
+    display: none;
+}
+.mobile_menu_close{
+    display: none
+}
+.nav_levels{
+    display: none
+}
+.nav_header{
     display: none;
 }
 

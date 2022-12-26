@@ -1,10 +1,18 @@
 <template>
+
+
+
+
 <div class="game_field">
-
+    
    <div class="game_wrapper">
-
+    <NavHeader />
         <ResultField :status="status" :level="level" :rules="level_data.onOffRules" :level_class="level_class"/>
         
+
+        <template v-if="this.$store.state.isTouchScreen">
+            <MobileDedMoroz :words="words" :current_level="level"/>
+        </template>
         <div class="pribor_panel">
             
             <div class="left_side">
@@ -50,8 +58,12 @@
             </div>
         </div>
     </div>
-    <CheckList @level_emit="change_level" :current_level="level"/>
-    <DedMorozSay :words="words"/>
+    
+        <CheckList @level_emit="change_level" :current_level="level" />
+    
+    <template v-if="!this.$store.state.isTouchScreen">
+        <DedMorozSay :words="words"/>
+    </template>
 </div>
 </template>
 
@@ -60,6 +72,10 @@ import ResultField from './ResultField.vue'
 import CheckList from './CheckList.vue'
 import DedMorozSay from './DedMorozSay.vue'
 import DropFielitem from './DropFielitem.vue'
+import MobileDedMoroz from './MobileDedMoroz.vue'
+
+import NavHeader from './NavHeader.vue'
+
 
 
 export default{
@@ -68,7 +84,9 @@ export default{
         ResultField,
         CheckList,
         DedMorozSay,
-        DropFielitem
+        DropFielitem,
+        MobileDedMoroz,
+        NavHeader
     },
     // emits: ["drop-emit", "dropEmit", "dragStartEmit", 'dragStart_emit'],
     data(){
@@ -81,12 +99,14 @@ export default{
             user_state: [],
             words: "",
             blink_interval: null,
-            touch_dataTransfer: null
+            touch_dataTransfer: null,
+            level_win_count: 0
         }
     },
     created(){
         this.setValues()
         this.$store.state.isTouchScreen = 'ontouchstart' in window || navigator.msMaxTouchPoints
+        this.goToWinPage()
     
     },
 
@@ -99,13 +119,21 @@ export default{
             this.devise_ids=[]
             clearInterval(this.blink_interval)
             
+            
+
+            if(this.$store.state.isTouchScreen){
+                document.querySelector('.left_nodebook_panel').style.display='none'
+            }
+
             this.setValues()
+            
             
         },
 
         setValues(){
             this.$store.state.userData = JSON.parse(localStorage.getItem('owenNG2033'))?
                 JSON.parse(localStorage.getItem('owenNG2033')):{}
+
 
             this.level= 'level'+this.$store.state.level,
             this.level_data = this.$store.state.levels[this.level]
@@ -293,7 +321,7 @@ export default{
 
             localStorage.setItem('owenNG2033', JSON.stringify(this.$store.state.userData))
 
-            console.log('ls', JSON.parse(localStorage.getItem('owenNG2033')))
+            this.goToWinPage()
             
         
         },
@@ -305,6 +333,15 @@ export default{
             this.words=this.level_data.wrong_texts[Math.floor(Math.random() * this.level_data.wrong_texts.length)]
 
             this.status = this.$store.state.userData[this.level] = null
+        },
+
+        goToWinPage(){
+            this.level_win_count = JSON.parse(localStorage.getItem('owenNG2033'))?
+                Object.keys(JSON.parse(localStorage.getItem('owenNG2033'))).length:0
+
+                if(this.level_win_count == 9 ){
+                    this.$router.push({ name: 'sNovymGodomView' })
+                }
         }
 
            

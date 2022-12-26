@@ -12,6 +12,9 @@ export default createStore({
   getters: {
     getUserData(state){
       return state.userData
+    },
+    getCount(state){
+      return state.userData.length
     }
   },
   mutations: {

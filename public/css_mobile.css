@@ -2,6 +2,7 @@
 and (max-width : 1200px) {
     .game_field{
         width: 100%;
+        background-color: #fff;
     }
     .game_main_field_wrapper, .onoff_field{
         width: 100%;
@@ -10,21 +11,41 @@ and (max-width : 1200px) {
         width: 100% !important;
     }
     .left_nodebook_panel{
+
+        position: fixed;
+        display: none;
+        width: 80%;
+        right: 0px;
+        z-index: 100;
+    }
+    .mobile_menu_close{
+        position: absolute;
+        top: 0px;
+        line-height: 1;
+        right: 10px;
+        display: block;
+        font-size: 56px;
+    }
+    .dedmoroz_fon{
         display: none;
     }
     .game_wrapper{
         width: 100%;
+        display: flex;
+        flex-direction: column;
+        height: 100vh;
     }
     .pribor_item_place{
         width: 100% !important;
         justify-content: space-around;
     }
 
-    #app{
+    /* #app{
         background-image: none;
-    }
+    } */
     .pribor_panel{
         flex-direction: column-reverse;
+        margin-top: auto;
     }
 
     .answer_blok, .pribor_item{
@@ -39,7 +60,8 @@ and (max-width : 1200px) {
     .up_side{
         display: block;
         text-align: center;
-        font-size: 36px;
+        font-size: 32px;
+        line-height: 1;
         font-weight: 800;
     }
     .right_side{
@@ -48,6 +70,85 @@ and (max-width : 1200px) {
 
     .fix_class{
         border-color:#008f86;
+    }
+    .MobileDedMoroz{
+        display: flex;
+        border-top: 5px solid #008f86;
+        border-bottom: 5px solid #008f86;
+    }
+    .MobileDedMoroz_words{
+        padding: 10px;
+    }
+    .MobileDedMoroz_fon{
+        width: 30%;
+        display: flex;
+        flex-direction: column;
+    }
+    .MobileDedMoroz_fon img{
+        width: auto;
+        /* height: 100%; */
+        margin-top:auto
+    }
+
+    .nav_header{
+        display: flex;
+        justify-content: space-between;
+    }
+    .nav_levels{
+        display: block;
+    }
+    .desctop_home_route{
+        display: none
+    }
+
+    .sNG .logo{
+        margin-top: 50px;
+    }
+    .sNG{
+        font-size: 1.2em !important;
+        padding: 10px !important;
+        width: 90vw !important;
+        margin-left: 2.6vw !important;
+    }
+    .checklist li{
+        margin-bottom: 30px;
+    }
+
+    .main_cloud{
+        width: 80vw;
+        font-size: 2em;
+    }
+    .main_btn_field{
+        margin-left: 0px;
+        align-items: center;
+    }
+    .btn{
+        width: 80vw;
+    }
+    .rules_field{
+        width: 80vw;
+        position: inherit;
+        overflow-y: auto;
+        height: auto;
+    }
+    .rules_bottom{
+        display:none
+    }
+    .rules_buttons .main_btn_field{
+        position: inherit;
+    }
+
+    .finish_buttons .btn{
+        background-color: #fff;
+        color: #000;
+        margin: 0px;
+        width: 82vw;
+
+
+    }
+    .finish_buttons{
+        
+        margin-top:auto;
     }
 
 }

@@ -2,6 +2,7 @@ import { createRouter, createWebHashHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import GameView from '../views/GameView.vue'
 import sNovymGodomView from '../views/sNovymGodomView.vue'
+import RulesView from '../views/RulesView'
 
 const routes = [
   {
@@ -29,7 +30,11 @@ const routes = [
     name: 'sNovymGodomView',
     component: sNovymGodomView
   },
-
+  {
+    path: '/rules',
+    name: 'RulesView',
+    component: RulesView
+  },
   
   {
     path: '/about',

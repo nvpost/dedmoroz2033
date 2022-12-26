@@ -1,6 +1,10 @@
 <template>
     <div class="left_nodebook_panel">
         <div class="checklist">
+            <span class="mobile_menu_close" @click="hideMobileMenu">&#215;</span>
+            
+            <span class="desctop_home_route"><router-link to="/">&#8962;</router-link></span>
+            
             <h2>Список дел</h2>
             <ul>
                 <li v-for="(level, key, idx) in levels" :key="key"
@@ -41,6 +45,9 @@ export default{
             let level=idx+1
             this.$store.state.level=level
             this.$emit('level_emit')
+        },
+        hideMobileMenu(){
+            document.querySelector('.left_nodebook_panel').style.display='none'
         }
     }
 }

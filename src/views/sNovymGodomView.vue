@@ -3,16 +3,25 @@
 <div> 
     <div class="sNG">
         <div class="sNG_text">
-            <h2>Поздравляем с новы годом зайчика!</h2>
+            <p>Зимний снег искрится и сверкает –</p>
+            <p>Чудная, прекрасная пора!</p>
+            <p>С Новым годом ОВЕН поздравляет,</p>
+            <p>Всем желая счастья и добра!</p>
+        </div>
+        <div class="finish_buttons finish_buttons_mobile">
+            <router-link
+            :to="{name:'home'}">                
+            <div class="btn">
+                В начало!
+            </div> 
+            
+            </router-link> 
         </div>
         <div class="logo" @click="stopBlink()">
               <img src="imgs/logo.png">
         </div>
     </div>
     
-    <div class="logo">
-              <img src="/imgs/logo.png">
-          </div>
           <div class="bottom">
           <div class="deer">
               <img src="imgs/deer.png">
@@ -25,6 +34,8 @@
           
 
       </div>
+
+
 
     </div>
 </template>
@@ -61,7 +72,8 @@ export default{
 <style>
 .deer{
     width: 100%;
-    height: 1520px;
+    position: fixed;
+    bottom: 0px;
 }
 .deer img{
     width: 100%
@@ -70,8 +82,13 @@ export default{
     position: absolute;
 }
 .sNG{
-    margin-top: 50px;
-    height: 70vh;
+    position: fixed;
+    top: 10vh;
+    height: auto;
+    font-size: 38px;
+
+    padding: 30px;
+    height: 60vh;
     width: 50vw;
     background-color: #008f86;
     margin-left: 100px;
@@ -85,7 +102,8 @@ export default{
 .sNG h2{
     font-size: 54px;
 }
-.sNG .logo{
+.sNG .logo,
+.sNG_text{
     margin-top:auto;
 
 }
