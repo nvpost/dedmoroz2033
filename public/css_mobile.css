@@ -105,7 +105,7 @@ and (max-width : 1200px) {
         margin-top: 50px;
     }
     .sNG{
-        font-size: 1.2em !important;
+        font-size: 34px !important;
         padding: 10px !important;
         width: 90vw !important;
         margin-left: 2.6vw !important;
@@ -143,12 +143,21 @@ and (max-width : 1200px) {
         color: #000;
         margin: 0px;
         width: 82vw;
-
-
     }
     .finish_buttons{
         
         margin-top:auto;
     }
+    .finish_buttons_mobile{
+        display: flex;
+    }
 
+}
+
+
+@media only screen
+and (max-width : 960px) {
+    .sNG{
+        font-size: 1.2em !important;
+    }
 }

@@ -16,10 +16,6 @@
 
         </div>
 
-
-
-
-
       <div class="bottom">
           <div class="dedmoroz">
               <img src="imgs/dedmoroz_left.png">

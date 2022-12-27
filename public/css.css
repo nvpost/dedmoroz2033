@@ -313,6 +313,20 @@ a{
     display: none;
 }
 
+.finish_buttons .btn{
+    background-color: #fff;
+    color: #000;
+    margin: 0px;
+    width: 82vw;
+}
+.finish_buttons{
+    
+    margin-top:auto;
+}
+.finish_buttons_mobile{
+    display: none;
+}
+
 
 
 

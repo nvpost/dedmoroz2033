@@ -50,7 +50,7 @@ export default{
         }
     },
     created(){
-         this.blink()
+        //  this.blink()
     },
     methods:{
         blink(){
@@ -85,7 +85,7 @@ export default{
     position: fixed;
     top: 10vh;
     height: auto;
-    font-size: 38px;
+    font-size: 36px;
 
     padding: 30px;
     height: 60vh;
@@ -97,6 +97,7 @@ export default{
     flex-direction: column;
     text-align: center;
     color:#fff;
+    white-space: nowrap;
 
 }
 .sNG h2{
